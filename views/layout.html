@@ -2,8 +2,7 @@
 <html lang="{{=T.accepted_language or 'en'}}" class="no-js"><!-- no-js need it for modernzr -->
   <head>
     
-    <meta charset="utf-8" />	  	
-    <!-- www.phpied.com/conditional-comments-block-downloads/ -->
+    <meta charset="utf-8" />
     <!--[if IE]><![endif]-->    
     <!-- Always force latest IE rendering engine 
 	 (even in intranet) & Chrome Frame 
@@ -77,7 +76,11 @@
 	<div id="header"> <!-- header and login nav -->
 	  {{block header}} <!-- this is default header -->
 	  {{try:}}{{=auth.navbar(action=URL('default','user'))}}{{except:pass}}		          
-	  <div id="logo"><!-- put your logo here --></div>
+	  <div id="logo">
+	    <a href="{{=URL(request.application,'default','index')}}">
+	        <h1>FLISOL-DF 2001</h1>
+	    </a>	    
+	  </div>
 	  <div style="clear: both;"></div><!-- Clear the divs -->
 	  {{end}}				  					  
 	</div><!-- header  -->
@@ -125,10 +128,16 @@
 	
 	<div id="footer">
 	  {{block footer}} <!-- this is default footer -->
-	  <a href="http://www.web2py.com/" style="float: left; padding-right: 6px;">
-	    <img src="{{=URL('static','images/poweredby.png')}}"/>
-	  </a>
-	  {{=T('Copyright')}} &#169; 2010				
+	    <center>
+	      <a href="http://www.web2py.com/">
+	        <img src="{{=URL('static','images/poweredby.png')}}"  style="padding-bottom: 3px;"/>
+	      </a>
+	      <a href="http://gae.google.com/">
+	        <img src="{{=URL('static','images/gae-silver-120x30.gif')}}"/>
+	      </a>
+	      <br />	      
+	      <span>{{=T('Copyright')}} &#169; 2010</span>
+	    </center>
 	  <div style="clear: both;"></div><!-- Clear the divs -->
 	  {{end}}
 
