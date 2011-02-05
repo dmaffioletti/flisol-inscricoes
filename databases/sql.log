@@ -1,4 +1,4 @@
-timestamp: 2011-02-04T23:43:45.633914
+timestamp: 2011-02-04T23:58:31.442960
 CREATE TABLE usuarios(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name CHAR(128),
@@ -10,21 +10,21 @@ CREATE TABLE usuarios(
     registration_id CHAR(512)
 );
 success!
-timestamp: 2011-02-04T23:43:45.636406
+timestamp: 2011-02-04T23:58:31.445471
 CREATE TABLE grupos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     role CHAR(512),
     description TEXT
 );
 success!
-timestamp: 2011-02-04T23:43:45.638611
+timestamp: 2011-02-04T23:58:31.449201
 CREATE TABLE relacionamento(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER REFERENCES usuarios(id) ON DELETE CASCADE,
     group_id INTEGER REFERENCES grupos(id) ON DELETE CASCADE
 );
 success!
-timestamp: 2011-02-04T23:43:45.641093
+timestamp: 2011-02-04T23:58:31.451604
 CREATE TABLE autorizacao(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     group_id INTEGER REFERENCES grupos(id) ON DELETE CASCADE,
@@ -33,7 +33,7 @@ CREATE TABLE autorizacao(
     record_id INTEGER
 );
 success!
-timestamp: 2011-02-04T23:43:45.643818
+timestamp: 2011-02-04T23:58:31.454461
 CREATE TABLE eventos(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     time_stamp TIMESTAMP,
