@@ -120,6 +120,7 @@
 'done!': 'concluído!',
 'edit profile': 'editar perfil',
 'export as csv file': 'exportar como um arquivo csv',
+'forgot username?': 'forgot username?',
 'insert new': 'inserir novo',
 'insert new %s': 'inserir novo %s',
 'invalid request': 'requisição inválida',
