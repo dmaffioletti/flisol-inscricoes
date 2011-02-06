@@ -67,6 +67,12 @@ custom_auth_table.password.requires = [
             IS_STRONG(min = 6, special = 0, upper = 0),CRYPT()]
 custom_auth_table.email.requires = [IS_EMAIL(error_message=auth.messages.invalid_email)]
 
+# Rotulo dos campos
+custom_auth_table.name.label = T('Name')
+custom_auth_table.username.label = T('Username')
+custom_auth_table.email.label = T('Email')
+custom_auth_table.password.label = T('Password')
+
 auth.define_tables()                           # cria todas as tabelas necessarias para o modulo Auth
 auth.settings.hmac_key = 'sha512:1d718a94-81cf-4274-8ac1-42207b203246'   # antes de define_tables()
 auth.settings.mailer = mail                    # para verificação de email
