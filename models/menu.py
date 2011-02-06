@@ -12,7 +12,6 @@ response.meta.keywords = 'web2py, flisol, software livre, acsldf'
 response.meta.generator = 'Web2py Enterprise Framework'
 response.meta.copyright = 'Copyright 2011'
 
-
 ##########################################
 ## Criando seus menus
 ##########################################
