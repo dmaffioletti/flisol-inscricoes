@@ -357,9 +357,6 @@ h6 {font-size: 0.8em;}
 #wrapper {background-color: #fff; padding: 5px;} 
 #statusbar { margin: 5px 0px 20px 0px;}
 #footer {
-    width: 98.5%;
-    bottom: 0;
-    position: absolute;
     margin-top: 30px;
     padding: 5px;
 }
@@ -419,6 +416,21 @@ div.error {
  */
 
 
+/* Login */
+#web2py_user_form { padding-top: 60px;}
+#web2py_user_form input {
+    font-size: 160%;
+    height: 25px;
+}
+
+#web2py_user_form label {
+    font-size: 140%;
+}
+
+#web2py_user_form input[type="submit"] {
+    width: 120px;
+    height: 35px;
+}
 
 /*
  * Media queries for responsive design
