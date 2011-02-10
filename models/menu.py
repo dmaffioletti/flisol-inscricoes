@@ -16,10 +16,24 @@ response.meta.copyright = 'Copyright 2011'
 ## Criando seus menus
 ##########################################
 
-response.menu = [
-    (T('Home'), False, URL(request.application,'default','index'), []),
-    (T('Atividades'), False, URL(request.application,'default','index'), []),
-    (T('Certificados'), False, URL(request.application,'default','index'), [])
-    ]
+if 'auth' in globals():
+    # Verifica se algum usuario esta logado
+    if not auth.is_logged_in():
+        response.menu = [
+            (T('Home'), False, URL(request.application,'default','index'), []),
+            (T('Sobre o Evento'), False, URL(request.application,'default','index'), []),            
+            ]        
+    else:    # Caso estiver logado exibe os menus de acordo com sua permissao
+        if auth.has_membership('Palestrante'):
+            response.menu = [
+                (T('Home'), False, URL(request.application,'default','index'), []),
+                (T('Atividades'), False, URL(request.application,'default','index'), []),
+                ]
+        if auth.has_membership('Inscrito'):
+                    response.menu = [
+                        (T('Home'), False, URL(request.application,'default','index'), []),
+                        (T('Atividades Inscritas'), False, URL(request.application,'default','index'), []),
+                        (T('Certificados'), False, URL(request.application,'default','index'), [])
+                        ]                
 
 
