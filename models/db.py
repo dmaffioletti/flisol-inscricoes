@@ -28,7 +28,8 @@ plugins = PluginManager()                      # Gerencia todos os plugins insta
 # Dados para envio de emails
 mail.settings.server = 'logging' or 'smtp.gmail.com:587'  # seu servidor SMTP
 mail.settings.sender = 'you@gmail.com'         # seu email
-mail.settings.login = 'username:password'      # suas credenciais ou vazio
+mail.settings.login = 'username:password'      # suas credenciais ou vazio (caso nao precise de autenticacao)
+
 
 # Antes de mais nada, temos que renomear as tabelas do modulo de autenticacao e controle de acesso
 auth.settings.table_user_name = 'usuarios'
@@ -36,6 +37,22 @@ auth.settings.table_group_name = 'grupos'
 auth.settings.table_membership_name = 'relacionamento'
 auth.settings.table_permission_name = 'autorizacao'
 auth.settings.table_event_name = 'eventos'
+
+### Tabela grupos (customizado)
+grupos = db.define_table(
+    auth.settings.table_group_name,
+    Field('role',length=128,default=''),
+    Field('description',length=128,default=''))
+    
+custom_group_table = grupos
+custom_group_table.role.requires = IS_NOT_EMPTY(error_message = T('is_empty'))
+custom_group_table.description.requires = IS_NOT_EMPTY(error_message = T('is_empty'))
+
+### Desabilitando a criacao automatica de grupos
+auth.settings.create_user_groups = False
+
+### Caso os grupos nao foram cadastrados, insere
+# TODO Implementar a carga inicial de grupos
 
 ### Tabela usuarios (customizado)
 
@@ -46,6 +63,7 @@ usuarios = db.define_table(
     Field('email', length=128, default=''),
     Field('password', 'password', length=512,
           readable=False, label='Password'),
+    Field('grupo', db.grupos, notnull = True),
     Field('registration_key', length=512,
           writable=False, readable=False, default=''),
     Field('reset_password_key', length=512,
@@ -58,20 +76,22 @@ custom_auth_table = usuarios
 custom_auth_table.name.requires = IS_NOT_EMPTY(error_message= T('is_empty'))
 custom_auth_table.username.requires = [
             IS_NOT_EMPTY(error_message = T('is_empty')),
-            IS_NOT_IN_DB(db, custom_auth_table.username)]
+            IS_NOT_IN_DB(db, custom_auth_table.username, T('login_already'))]
 custom_auth_table.password.requires = [
             # Especifica a complexidade da senha
             # minimo = 6
             # caracteres especiais = 0 (nenhum)
             # caracteres em maiusculo = 0 (nenhum)
-            IS_STRONG(min = 6, special = 0, upper = 0),CRYPT()]
+            IS_STRONG(min = 6, special = 0, upper = 0, invalid=' "', error_message = T('error_password')),CRYPT()]
 custom_auth_table.email.requires = [IS_EMAIL(error_message=auth.messages.invalid_email)]
+custom_auth_table.grupo.requires = IS_IN_DB(db, 'grupos.id', 'grupos.role', zero=T('escolha_grupo'), error_message=T('is_choose'))
 
 # Rotulo dos campos
 custom_auth_table.name.label = T('Name')
 custom_auth_table.username.label = T('Username')
 custom_auth_table.email.label = T('Email')
 custom_auth_table.password.label = T('Password')
+custom_auth_table.grupo.label = T('Perfil')
 
 auth.define_tables()                           # cria todas as tabelas necessarias para o modulo Auth
 auth.settings.hmac_key = 'sha512:1d718a94-81cf-4274-8ac1-42207b203246'   # antes de define_tables()
