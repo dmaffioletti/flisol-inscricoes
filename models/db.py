@@ -42,7 +42,8 @@ auth.settings.table_event_name = 'eventos'
 grupos = db.define_table(
     auth.settings.table_group_name,
     Field('role',length=128,default=''),
-    Field('description',length=128,default=''))
+    Field('description',length=128,default=''),
+    format='%(grupo)s')
     
 custom_group_table = grupos
 custom_group_table.role.requires = IS_NOT_EMPTY(error_message = T('is_empty'))
@@ -74,7 +75,8 @@ usuarios = db.define_table(
     Field('reset_password_key', length=512,
           writable=False, readable=False, default=''),
     Field('registration_id', length=512,
-          writable=False, readable=False, default=''))
+          writable=False, readable=False, default=''),
+    format='%(usuario)s')
 
 # Validacao dos campos
 custom_auth_table = usuarios
