@@ -51,8 +51,13 @@ custom_group_table.description.requires = IS_NOT_EMPTY(error_message = T('is_emp
 ### Desabilitando a criacao automatica de grupos
 auth.settings.create_user_groups = False
 
-### Caso os grupos nao foram cadastrados, insere
-# TODO Implementar a carga inicial de grupos
+### Caso os grupos nao foram cadastrados, sao inseridos automaticamente
+papeis = ('Administrador','Inscrito','Palestrante')
+
+for papel in papeis:
+    grupo = db(db.grupos.role == papel).select().first()
+    if not grupo:
+        db.grupos.insert(role=papel,description='Grupo tipo %s'%papel)
 
 ### Tabela usuarios (customizado)
 
@@ -96,7 +101,12 @@ custom_auth_table.grupo.label = T('Perfil')
 auth.define_tables()                           # cria todas as tabelas necessarias para o modulo Auth
 auth.settings.hmac_key = 'sha512:1d718a94-81cf-4274-8ac1-42207b203246'   # antes de define_tables()
 auth.settings.mailer = mail                    # para verificação de email
+
+# Habilitando verificacao de senha e desabilitando aprovacao de cadastro
 auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
+
+# Traduzindo o rotulo do campo Submit
+auth.messages.submit_button = T('Submit')
 
 crud.settings.auth = None                      # força autorizacao no CRUD
