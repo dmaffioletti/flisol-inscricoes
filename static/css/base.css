@@ -121,6 +121,10 @@ body { font:13px/1.231 sans-serif; *font-size:small; } /* hack retained to prese
 
 select, input, textarea, button { font:99% sans-serif; }
 
+select {font-size: 120%; height: 25px;}
+
+.reference {font-size: 120%; height: 25px;}
+
 
 /* normalize monospace sizing 
  * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
@@ -148,6 +152,8 @@ a:hover, a:active { outline: none; }
 
 a, a:active, a:visited { color:#7F4C1A; }
 a:hover { color:#E58A2F; }
+
+img {border: 0;}
 
 ul, ol { margin-left: 1.8em; }
 ol { list-style-type: decimal; }
