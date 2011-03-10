@@ -5,4 +5,4 @@ Esse sistema está sendo desenvolvido pelo GruPy-DF (com dois dos moderadores da
 
 Informações sobre o projeto (requisitos, releases): <https://www.pivotaltracker.com/projects/236897>
 
-Sugestões, adicione na seção Issues do projeto.
+Sugestões, adicione na seção *Issues* do projeto.
