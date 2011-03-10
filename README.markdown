@@ -3,4 +3,4 @@ Esse sistema controla e gerencia todo o processo de inscrição de atividades (p
 
 Esse sistema está sendo desenvolvido pelo GruPy-DF (com dois dos moderadores da comunidade, Bruno Barbosa e Gilson) em parceria com a ACSL (Associação Candango de Software Livre).
 
-Informações sobre o projeto (requisitos releases): <(https://www.pivotaltracker.com/projects/236897>
+Informações sobre o projeto (requisitos releases): <https://www.pivotaltracker.com/projects/236897>
